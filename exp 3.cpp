@@ -18,6 +18,9 @@ int main()
     cout << "\n3. Bubble Sort";
     cout << "\n4. Insertion Sort";
     cout << "\n5. Selection Sort";
+    cout << "\n6. Quick Sort";
+    cout << "\n7. Merge Sort";
+    cout << "\n8. Radix Sort";
     cout << "\nEnter your choice: ";
     cin >> ch;
 
@@ -109,6 +112,97 @@ int main()
                 a[i] = a[min];
                 a[min] = temp;
             }
+            case 6:
+		cout<<"Quick sorting\n";
+	
+            for(i=0;i<n-1;i++)
+            {
+                for(j=i+1;j<n;j++)
+                {
+                    if(a[i]>a[j])
+                    {
+                        temp=a[i];
+                        a[i]=a[j];
+                        a[j]=temp;
+                    }
+                }
+            }
+            cout<<"Sorted array:\n";
+            for(i=0; i<n; i++)
+                cout<<a[i]<< " ";
+            break;
+
+        case 7: 
+        cout<<"Merge Sorting\n";
+            {
+    int size, left;
+
+    for(size = 1; size < n; size = size * 2)
+    {
+        for(left = 0; left < n - size; left = left + 2 * size)
+        {
+            int mid = left + size - 1;
+            int right = left + 2 * size - 1;
+
+            if(right >= n)
+                right = n - 1;
+
+            int i = left;
+            int j = mid + 1;
+            int k = 0;
+            int tempArr[50];
+
+            while(i <= mid && j <= right)
+            {
+                if(a[i] < a[j])
+                    tempArr[k++] = a[i++];
+                else
+                    tempArr[k++] = a[j++];
+            }
+
+            while(i <= mid)
+                tempArr[k++] = a[i++];
+
+            while(j <= right)
+                tempArr[k++] = a[j++];
+
+            for(i = left, k = 0; i <= right; i++, k++)
+                a[i] = tempArr[k];
+        }
+    }
+}
+            cout<<"Sorted array:\n";
+            for(i=0; i<n; i++)
+                cout<<a[i]<< " ";
+            break;
+
+        case 8: 
+        cout<<"Radix Sorting\n";
+        {
+            int max=a[0];
+            for(i=1;i<n;i++)
+                if(a[i]>max)
+                    max=a[i];
+
+            for(int exp=1;max/exp>0;exp*=10)
+            {
+                int output[50],count[10]={0};
+
+                for(i=0;i<n;i++)
+                    count[(a[i]/exp)%10]++;
+
+                for(i=1;i<10;i++)
+                    count[i]+=count[i-1];
+
+                for(i=n-1;i>=0;i--)
+                {
+                    output[count[(a[i]/exp)%10]-1] = a[i];
+                    count[(a[i]/exp)%10]--;
+                }
+
+                for(i=0;i<n;i++)
+                    a[i]=output[i];
+            }
             cout << "Sorted array:\n";
             for(i = 0; i < n; i++)
                 cout << a[i] << " ";
@@ -120,3 +214,4 @@ int main()
 
     return 0;
 }
+
